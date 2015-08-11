@@ -1,5 +1,7 @@
 # LibPixel
 
+[![Build Status](https://travis-ci.org/libpixel/libpixel-ruby.svg?branch=master)](https://travis-ci.org/libpixel/libpixel-ruby)
+
 Ruby library to generate and sign LibPixel URLs.
 
 ## Installation

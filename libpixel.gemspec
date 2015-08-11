@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Joao Carlos"]
   spec.email         = ["joao@libpixel.com"]
   spec.summary       = %q{Ruby library to generate and sign LibPixel URLs.}
-  spec.homepage      = "http://libpixel.com"
+  spec.homepage      = "https://github.com/libpixel/libpixel-ruby"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

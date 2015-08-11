@@ -61,6 +61,13 @@ describe LibPixel::Client do
       url = "http://test.libpx.com/images/1.jpg?width=600&signature=dfcaec7b88d53a7a932e8a6a00d10b4f9ff1336b"
       assert_equal url, client.url("/images/1.jpg", width: 600)
     end
+
+    it "sets the path to '/' if nil or empty" do
+      client = LibPixel::Client.new(host: "test.libpx.com")
+      url = "http://test.libpx.com/?src=url"
+      assert_equal url, client.url("", src: "url")
+      assert_equal url, client.url(nil, src: "url")
+    end
   end
 
 end

@@ -29,6 +29,7 @@ module LibPixel
     end
 
     def url(path, options={})
+      path = "/" if path.nil? || path.empty?
       query = options.map { |k,v| "#{k}=#{URI.encode_www_form_component(v)}" }.join("&")
 
       if query == ""

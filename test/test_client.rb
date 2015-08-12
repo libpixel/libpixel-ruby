@@ -68,6 +68,12 @@ describe LibPixel::Client do
       assert_equal url, client.url("", src: "url")
       assert_equal url, client.url(nil, src: "url")
     end
+
+    it "sets the path to '/' if the path is omitted" do
+      client = LibPixel::Client.new(host: "test.libpx.com")
+      url = "http://test.libpx.com/?src=url"
+      assert_equal url, client.url(src: "url")
+    end
   end
 
 end

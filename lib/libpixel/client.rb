@@ -28,7 +28,15 @@ module LibPixel
       uri.to_s
     end
 
-    def url(path, options={})
+    def url(path_or_options, options={})
+      path = nil
+
+      if path_or_options.respond_to? :fetch
+        options = path_or_options
+      else
+        path = path_or_options
+      end
+
       path = "/" if path.nil? || path.empty?
       query = options.map { |k,v| "#{k}=#{URI.encode_www_form_component(v)}" }.join("&")
 

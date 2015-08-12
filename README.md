@@ -48,6 +48,12 @@ You can also generate and sign URLs at the same time with the `url` function:
 url = LibPixel.url("/images/1.jpg", height: 400, blur: 20, saturation: -80)
 ```
 
+If you're using the `src` parameter, you can skip the path:
+
+```ruby
+url = LibPixel.url(src: "http://...", width: 300)
+```
+
 ### Multiple clients
 
 It's also possible to have multiple instances of LibPixel clients (e.g. when dealing with multiple accounts):

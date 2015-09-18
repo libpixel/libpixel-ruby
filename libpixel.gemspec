@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "libpixel"
   spec.version       = LibPixel::VERSION
   spec.authors       = ["Joao Carlos", "Stephen Sykes"]
-  spec.email         = ["joao@libpixel.com"]
+  spec.email         = ["support@libpixel.com"]
   spec.summary       = %q{Ruby library and Rails plugin to generate and sign LibPixel URLs.}
   spec.homepage      = "https://github.com/libpixel/libpixel-ruby"
   spec.license       = "MIT"

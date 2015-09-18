@@ -6,9 +6,9 @@ require 'libpixel/version'
 Gem::Specification.new do |spec|
   spec.name          = "libpixel"
   spec.version       = LibPixel::VERSION
-  spec.authors       = ["Joao Carlos"]
+  spec.authors       = ["Joao Carlos", "Stephen Sykes"]
   spec.email         = ["joao@libpixel.com"]
-  spec.summary       = %q{Ruby library to generate and sign LibPixel URLs.}
+  spec.summary       = %q{Ruby library and Rails plugin to generate and sign LibPixel URLs.}
   spec.homepage      = "https://github.com/libpixel/libpixel-ruby"
   spec.license       = "MIT"
 
@@ -20,4 +20,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "minitest"
+  spec.add_development_dependency "rails", "~> 4.2.3"
 end

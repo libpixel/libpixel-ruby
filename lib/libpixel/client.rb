@@ -9,6 +9,9 @@ module LibPixel
       options.each do |key, value|
         send("#{key}=", value)
       end
+
+      self.host   ||= ENV["LIBPIXEL_HOST"]
+      self.secret ||= ENV["LIBPIXEL_SECRET"]
     end
 
     def sign(uri)

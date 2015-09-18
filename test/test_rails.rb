@@ -32,7 +32,7 @@ class LibPixelTest < ActionView::TestCase
 
   test "Image tag without host" do
     LibPixel.host = nil
-    assert_raise do
+    assert_raises do
       libpixel_image_tag("foo.jpg")
     end
   end
@@ -59,7 +59,7 @@ class LibPixelTest < ActionView::TestCase
 
   test "Image tag with source with spaces should raise" do
     LibPixel.default_source = "us-east-1/foo bar"
-    assert_raise {
+    assert_raises {
       libpixel_image_tag("foo.jpg")
     }
   end

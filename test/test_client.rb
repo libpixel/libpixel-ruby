@@ -64,6 +64,13 @@ describe LibPixel::Client do
       assert_equal "http://test.libpx.com/images/1.jpg?signature=bd5634c055d707c1638eff93eb88ff31277958f0#test",
         @client.sign("http://test.libpx.com/images/1.jpg#test")
     end
+
+    it "requires the secret to be set" do
+      @client.secret = nil
+      assert_raises do
+        @client.sign("http://test.libpx.com/images/1.jpg")
+      end
+    end
   end
 
   describe "#url" do

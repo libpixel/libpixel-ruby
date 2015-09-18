@@ -15,6 +15,10 @@ module LibPixel
     end
 
     def sign(uri)
+      if secret.nil?
+        raise "Your LibPixel secret must be defined (e.g. LibPixel.secret = 'SECRET')"
+      end
+
       uri = URI.parse(uri) unless uri.kind_of?(URI::Generic)
 
       query = uri.query

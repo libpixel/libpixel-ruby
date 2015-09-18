@@ -103,6 +103,13 @@ describe LibPixel::Client do
       url = "http://test.libpx.com/?src=url"
       assert_equal url, client.url(src: "url")
     end
+
+    it "requires the host to be set" do
+      @client.host = nil
+      assert_raises do
+        @client.url("images/1.jpg")
+      end
+    end
   end
 
 end

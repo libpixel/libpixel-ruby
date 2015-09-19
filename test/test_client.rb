@@ -3,9 +3,38 @@ require "minitest_helper"
 describe LibPixel::Client do
 
   before do
+    ENV.delete("LIBPIXEL_HOST")
+    ENV.delete("LIBPIXEL_SECRET")
+
     @client = LibPixel::Client.new({
       host: "test.libpx.com", https: false, secret: "LibPixel"
     })
+  end
+
+  describe ".new" do
+    it "uses the LIBPIXEL_HOST env var as a default host" do
+      ENV["LIBPIXEL_HOST"] = "env"
+      client = LibPixel::Client.new
+      assert_equal "env", client.host
+    end
+
+    it "uses the LIBPIXEL_SECRET env var as a default secret" do
+      ENV["LIBPIXEL_SECRET"] = "secret-env"
+      client = LibPixel::Client.new
+      assert_equal "secret-env", client.secret
+    end
+
+    it "prefers the host option to the LIBPIXEL_HOST env var" do
+      ENV["LIBPIXEL_HOST"] = "env"
+      client = LibPixel::Client.new(host: "my-host")
+      assert_equal "my-host", client.host
+    end
+
+    it "prefers the secret option to the LIBPIXEL_SECRET env var" do
+      ENV["LIBPIXEL_SECRET"] = "secret-env"
+      client = LibPixel::Client.new(secret: "top-secret")
+      assert_equal "top-secret", client.secret
+    end
   end
 
   describe "#sign" do
@@ -34,6 +63,13 @@ describe LibPixel::Client do
     it "supports URLs with a fragment but no query string" do
       assert_equal "http://test.libpx.com/images/1.jpg?signature=bd5634c055d707c1638eff93eb88ff31277958f0#test",
         @client.sign("http://test.libpx.com/images/1.jpg#test")
+    end
+
+    it "requires the secret to be set" do
+      @client.secret = nil
+      assert_raises do
+        @client.sign("http://test.libpx.com/images/1.jpg")
+      end
     end
   end
 
@@ -73,6 +109,13 @@ describe LibPixel::Client do
       client = LibPixel::Client.new(host: "test.libpx.com")
       url = "http://test.libpx.com/?src=url"
       assert_equal url, client.url(src: "url")
+    end
+
+    it "requires the host to be set" do
+      @client.host = nil
+      assert_raises do
+        @client.url("images/1.jpg")
+      end
     end
   end
 

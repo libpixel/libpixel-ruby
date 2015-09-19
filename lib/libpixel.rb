@@ -9,6 +9,22 @@ module LibPixel
     yield @@default_client
   end
 
+  def self.host=(host)
+    @@default_client.host = host
+  end
+
+  def self.secret=(secret)
+    @@default_client.secret = secret
+  end
+
+  def self.https=(https)
+    @@default_client.https = https
+  end
+
+  def self.default_source=(default_source)
+    @@default_client.default_source = default_source
+  end
+
   def self.sign(uri)
     @@default_client.sign(uri)
   end
@@ -18,3 +34,5 @@ module LibPixel
   end
 
 end
+
+require 'libpixel/railtie' if defined?(Rails)

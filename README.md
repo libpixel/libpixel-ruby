@@ -94,47 +94,47 @@ You may then call the `#url` and `#sign` methods on the client object.
 
 ## Ruby on Rails
 
-The LibPixel gem includes a Rails plugin that provides a view helper that you can use in place of normal calls to image_tag. The libpixel host and libpixel secret settings should be set in an initializer, or will be automatically picked up from the environment variables LIBPIXEL_HOST and LIBPIXEL_SECRET.
+The LibPixel gem includes a Rails plugin that provides a view helper that you can use in place of normal calls to `image_tag`. The libpixel host and libpixel secret settings should be set in an initializer, or will be automatically picked up from the environment variables `LIBPIXEL_HOST` and `LIBPIXEL_SECRET`.
 
 ```ruby
-libpixel_image_tag("us-east-1/source/foo.jpg")
-=> "<img src=\"http://example.libpx.com/us-east-1/source/foo.jpg\" alt=\"Foo\" />"
+libpixel_image_tag("eu-west-1/source/foo.jpg")
+=> "<img src=\"http://example.libpx.com/eu-west-1/source/foo.jpg\" alt=\"Foo\" />"
 ```
 
-You specify the libpixel processing parameters in a hash within the normal options hash, denoted by the key :libpixel.
+You specify the libpixel processing parameters in a hash within the normal options hash, denoted by the key `:libpixel`.
 
 ```ruby
-libpixel_image_tag("us-east-1/source/foo.jpg", :libpixel => {:width => 300})
+libpixel_image_tag("eu-west-1/source/foo.jpg", :libpixel => {:width => 300})
 ```
 
-The normal parameters that rails uses will also work.
+The normal parameters that Rails uses will also work.
 
 ```ruby
-libpixel_image_tag("us-east-1/source/foo.jpg", :libpixel => {:width => 300, :dpi => 2}, :size => "300x250")
+libpixel_image_tag("eu-west-1/source/foo.jpg", :libpixel => {:width => 300, :dpr => 2}, :size => "300x250")
 ```
 
-If all your images are from the same source, it's helpful to configure a default_sorurce in an initializer.
+If all your images are from the same source, it's helpful to configure a `default_source` in an initializer.
 
 ```ruby
-LibPixel.default_source = "us-east-1/source"
+LibPixel.default_source = "eu-west-1/source"
 ```
 
 Then you can omit the source in your tags.
 
 ```ruby
-libpixel_image_tag("foo.jpg", :libpixel => {:width => 300, :dpi => 2}, :size => "300x250")
+libpixel_image_tag("foo.jpg", :libpixel => {:width => 300, :dpr => 2}, :size => "300x250")
 ```
 
 If you need to override the default source, you can do that using the source parameter.
 
 ```ruby
-libpixel_image_tag("foo.jpg", :libpixel => {:width => 300, :dpi => 2, :source => "eu-west-1/source2"}, :size => "300x250")
+libpixel_image_tag("foo.jpg", :libpixel => {:width => 300, :dpr => 2, :source => "eu-west-1/source2"}, :size => "300x250")
 ```
 
-Referring to an image outside of your configured soures is also possible.
+Referring to an image outside of your configured sources is also possible.
 
 ```ruby
-libpixel_image_tag("http://example.com/images/foo.jpg", :libpixel => {:width => 300, :dpi => 2}, :size => "300x250")
+libpixel_image_tag("http://example.com/images/foo.jpg", :libpixel => {:width => 300, :dpr => 2}, :size => "300x250")
 ```
 
 You can configure your generated image src urls to use https or http in your initializer.

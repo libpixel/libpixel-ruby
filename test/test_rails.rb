@@ -7,6 +7,7 @@ class LibPixelTest < ActionView::TestCase
     LibPixel.default_source = "source"
     LibPixel.host = "example.libpx.com"
     LibPixel.secret = nil
+    LibPixel.https = false
   end
   
   test "Image tag with secret" do
@@ -74,5 +75,19 @@ class LibPixelTest < ActionView::TestCase
 
   test "Image tag with libpixel width and img width specified" do
     assert_equal "<img width=\"200\" src=\"http://example.libpx.com/source/foo.jpg?width=400\" alt=\"Foo\" />", libpixel_image_tag("foo.jpg", :libpixel => {:width => 400}, :width => 200)
+  end
+  
+  test "Image tag with https config" do
+    LibPixel.https = true
+    assert_equal "<img src=\"https://example.libpx.com/source/foo.jpg\" alt=\"Foo\" />", libpixel_image_tag("foo.jpg")
+  end
+  
+  test "Image tag with https option" do
+        assert_equal "<img width=\"200\" alt=\"Foo\" src=\"https://example.libpx.com/source/?width=400&src=https%3A%2F%2Fa.b.com%2Ffoo.jpg\" />", libpixel_image_tag("https://a.b.com/foo.jpg", :libpixel => {:width => 400, :https => true}, :width => 200)
+  end
+
+  test "Image tag with http option" do
+    LibPixel.https = true
+    assert_equal "<img src=\"http://example.libpx.com/source/foo.jpg\" alt=\"Foo\" />", libpixel_image_tag("foo.jpg", :libpixel => {:https => false})
   end
 end

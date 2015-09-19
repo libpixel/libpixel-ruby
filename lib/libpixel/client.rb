@@ -55,6 +55,9 @@ module LibPixel
 
       source = options.fetch(:source) {default_source}
       options = options.reject {|k| k == :source}
+      
+      use_https = options.fetch(:https) {https}
+      options = options.reject {|k| k == :https}
 
       query = options.map { |k,v| "#{k}=#{URI.encode_www_form_component(v)}" }.join("&")
 
@@ -73,7 +76,7 @@ module LibPixel
       end
 
       uri = URI::Generic.new(
-        (https ? "https" : "http"), nil, host, nil, nil, path, nil, query, nil
+        (use_https ? "https" : "http"), nil, host, nil, nil, path, nil, query, nil
       )
 
       if secret

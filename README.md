@@ -73,7 +73,7 @@ libpixel_image_tag("us-east-1/source/foo.jpg")
 => "<img src=\"http://example.libpx.com/us-east-1/source/foo.jpg\" alt=\"Foo\" />"
 ```
 
-You specify the libpixel processing parameters in the hash within the normal options hash, denoted by the key :libpixel.
+You specify the libpixel processing parameters in a hash within the normal options hash, denoted by the key :libpixel.
 
 ```ruby
 libpixel_image_tag("us-east-1/source/foo.jpg", :libpixel => {:width => 300})

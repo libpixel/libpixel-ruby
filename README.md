@@ -29,8 +29,11 @@ LibPixel.setup do |config|
   config.host = "test.libpx.com" # Your LibPixel domain. Required.
   config.https = true # Generates HTTPS URLs. Optional. Default is false.
   config.secret = "..." # Auth secret for your LibPixel account. Required for signing requests.
+  config.default_source = "us-east-1/source" # optional source to be used, can be overriden
 end
 ```
+
+The configuration for host and secret will be automatically set from the environment variables LIBPIXEL_HOST and LIBPIXEL_SECRET if they are present.
 
 ### Sign URLs
 
@@ -45,7 +48,7 @@ url = LibPixel.sign("http://test.libpx.com/images/1.jpg?width=400")
 You can also generate and sign URLs at the same time with the `url` function:
 
 ```ruby
-url = LibPixel.url("/images/1.jpg", height: 400, blur: 20, saturation: -80)
+url = LibPixel.url("/us-east-1/images/1.jpg", height: 400, blur: 20, saturation: -80)
 ```
 
 If you're using the `src` parameter, you can skip the path:
@@ -53,6 +56,31 @@ If you're using the `src` parameter, you can skip the path:
 ```ruby
 url = LibPixel.url(src: "http://...", width: 300)
 ```
+
+But even simpler, if the library sees a url beginning with http or https it knows what to do:
+
+```ruby
+url = LibPixel.url("http://...", width: 300)
+```
+
+You can specify whether you what an http or https url in your call:
+
+```ruby
+url = LibPixel.url("/us-east-1/images/1.jpg", height: 400, blur: 20, saturation: -80, https: true)
+```
+
+If you are using a default_source, you don't need to specify it in the path:
+
+```ruby
+url = LibPixel.url("1.jpg", height: 400, blur: 20, saturation: -80)
+```
+
+But you can override it with the source parameter:
+
+```ruby
+url = LibPixel.url("1.jpg", height: 400, blur: 20, saturation: -80, source: "us-west-1/source2")
+```
+
 
 ### Multiple clients
 
@@ -108,6 +136,21 @@ Referring to an image outside of your configured soures is also possible.
 ```ruby
 libpixel_image_tag("http://example.com/images/foo.jpg", :libpixel => {:width => 300, :dpi => 2}, :size => "300x250")
 ```
+
+You can configure your generated image src urls to use https or http in your initializer.
+
+```ruby
+LibPixel.https = true  # default is false
+```
+
+And you can specify it on a per-tag basis.
+
+```ruby
+libpixel_image_tag("us-east-1/source/foo.jpg", :libpixel => {:https => true})
+=> "<img src=\"https://example.libpx.com/us-east-1/source/foo.jpg\" alt=\"Foo\" />"
+```
+
+
 
 ## License
 
